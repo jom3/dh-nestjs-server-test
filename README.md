@@ -24,6 +24,7 @@
 create a .env file and paste this of course in your case it's gonna be different
 
 DATABASE_URL="postgresql://postgres:postgres@localhost/dh-technical-tests"
+
 SECRET="secreto"
 
 ## Description
