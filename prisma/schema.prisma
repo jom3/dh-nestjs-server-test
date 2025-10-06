@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String @id @default(uuid()) @map("id")
+  email        String @unique @map("email")
+  password     String @map("password")
+  createdNotes Note[] @relation("CreatedBy")
+  updatedNotes Note[] @relation("UpdatedBy")
+}
+
+model Note {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tags        NoteTag[]
+  archived    Boolean  @default(false)
+  createdBy   User      @relation("CreatedBy", fields: [createdById], references: [id])
+  createdById String
+  updatedBy   User?     @relation("UpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model Tag {
+  id    Int       @id @default(autoincrement())
+  name  String    @unique
+  notes NoteTag[]
+}
+
+model NoteTag {
+  noteId Int
+  tagId  Int
+  note   Note @relation(fields: [noteId], references: [id])
+  tag    Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([noteId, tagId])
+}
