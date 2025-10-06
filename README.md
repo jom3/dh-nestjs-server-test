@@ -19,6 +19,13 @@
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
 
+## Environtment
+
+create a .env file and paste this of course in your case it's gonna be different
+
+DATABASE_URL="postgresql://postgres:postgres@localhost/dh-technical-tests"
+SECRET="secreto"
+
 ## Description
 
 Digital Harbor technical test.
